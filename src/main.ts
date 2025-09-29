@@ -16,7 +16,7 @@ bootstrapApplication(App, {
     provideHttpClient(withInterceptorsFromDi()),
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: '6LewtMQrAAAAACHNXAds6v6H9DGVs6ucyx7Rcpxe', // your site key
+      useValue: '', // your site key
     },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     // provideAnimations(), 

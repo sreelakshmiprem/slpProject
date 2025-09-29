@@ -16,7 +16,7 @@ declare let toastr: any;
   providers: [
     {
       provide: RECAPTCHA_V3_SITE_KEY,
-      useValue: '6LewtMQrAAAAACHNXAds6v6H9DGVs6ucyx7Rcpxe',
+      useValue: '',
     }],
   templateUrl: './login-page.html',
   styleUrl: './login-page.scss'
