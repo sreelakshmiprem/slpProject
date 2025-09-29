@@ -1,0 +1,131 @@
+<div class="add-job-container">
+  <app-header></app-header>
+
+  <div class="content">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <h2>Add Job</h2>
+
+      <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label>Posted Date</label>
+          <input type="text" [value]="todayDate| date:'dd/MM/yyyy'" readonly />
+        </div>
+
+
+        <div class="form-group">
+          <label>Job Title</label>
+          <input type="text" formControlName="jobTitle" placeholder="Enter job title" maxlength="50" />
+          @if (jobForm.get('jobTitle')?.touched && jobForm.get('jobTitle')?.hasError('required')) {
+          <div class="error-message">Job title is required</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Job Description</label>
+          <textarea formControlName="jobDescription" placeholder="Enter job description" maxlength="100"></textarea>
+          @if (jobForm.get('jobDescription')?.touched && jobForm.get('jobDescription')?.hasError('required')) {
+          <div class="error-message">Job description is required</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Min Experience</label>
+          <input type="number" formControlName="minRequiredExperience" />
+          @if (jobForm.get('minRequiredExperience')?.touched &&
+          jobForm.get('minRequiredExperience')?.hasError('required')) {
+          <div class="error-message">Min experience is required</div>
+          }
+          @if (jobForm.get('minRequiredExperience')?.hasError('min') ||
+          jobForm.get('minRequiredExperience')?.hasError('max')) {
+          <div class="error-message">Value must be between 0 and 100</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Max Experience</label>
+          <input type="number" formControlName="maxRequiredExperience" />
+
+          @if ((jobForm.get('maxRequiredExperience')?.touched || jobForm.get('maxRequiredExperience')?.dirty) &&
+          jobForm.get('maxRequiredExperience')?.hasError('required')) {
+          <div class="error-message">Max experience is required</div>
+          }
+
+          @if ((jobForm.get('maxRequiredExperience')?.touched || jobForm.get('maxRequiredExperience')?.dirty) &&
+          (jobForm.get('maxRequiredExperience')?.hasError('min') ||
+          jobForm.get('maxRequiredExperience')?.hasError('max'))) {
+          <div class="error-message">Value must be between 1 and 100</div>
+          }
+        </div>
+        @if (jobForm.errors?.['minGreaterThanMax']) {
+        <div class="error-message">Max experience should be greater than Min experience</div>
+        }
+
+
+        <div class="form-group">
+          <label>Deadline</label>
+          <input type="date" formControlName="deadline" [min]="todayDate" />
+          @if (jobForm.get('deadline')?.touched && jobForm.get('deadline')?.hasError('required')) {
+          <div class="error-message">Deadline is required</div>
+          }
+          @if (jobForm.errors?.['deadlineNotAfterPosted'] && jobForm.get('deadline')?.touched) {
+          <div class="error-message">Deadline date should be after the posted date</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Job Location</label>
+          <input type="text" formControlName="jobLocation" maxlength="50" />
+          @if (jobForm.get('jobLocation')?.touched && jobForm.get('jobLocation')?.hasError('required')) {
+          <div class="error-message">Job location is required</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Salary</label>
+          <input type="number" formControlName="salary" />
+          @if (jobForm.get('salary')?.touched && jobForm.get('salary')?.hasError('required')) {
+          <div class="error-message">Salary is required</div>
+          }
+          @if (jobForm.get('salary')?.touched && jobForm.get('salary')?.hasError('min')) {
+          <div class="error-message">Salary cannot be negative</div>
+          }
+        </div>
+
+
+        <div class="form-group">
+          <label>Required Skills</label>
+          <div class="skills-list">
+            @for (skill of masterSkills; track skill.masterSkillId) {
+            <div>
+              <input type="checkbox" [value]="skill.masterSkillId"
+                (change)="onCheckboxChange(skill.masterSkillId, $event)" />
+              <span>{{ skill.skillName }}</span>
+            </div>
+            }
+          </div>
+
+          @if (submitted && jobForm.get('requiredSkillIds')?.hasError('noSkillSelected')) {
+          <div class="error-message">Skills are required</div>
+          }
+
+
+        </div>
+
+
+        <button type="submit" class="btn-submit" [disabled]="jobForm.invalid">
+          Submit
+        </button>
+      </form>
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>

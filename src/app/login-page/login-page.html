@@ -1,0 +1,80 @@
+<div class="login-wrapper">
+  <div class="login-left">
+    <div class="login-content">
+      <img
+        src="https://thumbs.dreamstime.com/b/job-portal-lettering-logo-design-template-concept-professional-employee-recruitment-agency-logo-vector-job-portal-lettering-220648774.jpg"
+        alt="Job Portal" class="job-image" />
+      <h3>Welcome to JobFinder</h3>
+      <p>Find your dream job, apply instantly, and get hired faster.</p>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-container">
+      <h2>Login</h2>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+        <div class="form-group">
+          <label for="userName">Username</label>
+          <input type="email" id="userName" formControlName="userName" placeholder="Enter your email" />
+
+          @if (f['userName'].touched && f['userName'].errors) {
+          <div class="error-message">
+            @if (f['userName'].errors['required']) { <div>Email is required.</div> }
+            @if (f['userName'].errors['email']) { <div>Invalid email format.</div> }
+            @if (f['userName'].errors['minlength']) { <div>Email must be at least 10 characters.</div> }
+            @if (f['userName'].errors['maxlength']) { <div>Email cannot exceed 350 characters.</div> }
+            @if (f['userName'].errors['pattern']) { <div>Email domain must be a registered domain.</div> }
+          </div>
+          }
+        </div>
+
+
+        <div class="form-group password-group">
+          <label for="password">Password</label>
+          <div class="form-group">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+              placeholder="Enter your password" />
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()"></i>
+          </div>
+
+          @if (f['password'].touched && f['password'].errors) {
+          <div class="error-message">
+            @if (f['password'].errors['required']) { <div>Password is required.</div> }
+            @if (f['password'].errors['minlength']) { <div>Must be at least 6 characters.</div> }
+            @if (f['password'].errors['maxlength']) { <div>Cannot exceed 64 characters.</div> }
+            @if (f['password'].errors['pattern']) { <div>Must contain 1 uppercase, 1 lowercase, 1 number, and 1 special
+              character.</div> }
+          </div>
+          }
+        </div>
+
+
+        <input type="text" formControlName="extraField" (focus)="onHoneypotFocus()" (blur)="onHoneypotBlur()"
+          style="display:none" />
+
+        <button type="submit" [disabled]="loginForm.invalid || isLoading">Login</button>
+      </form>
+
+      @if (isLoading) {
+      <div class="spinner-overlay">
+        <div class="spinner"></div>
+      </div>
+      }
+
+      <div class="register-redirect">
+        <p>
+          Not registered yet?
+          <a (click)="goToRegister()" class="register-link">Register here</a>
+        </p>
+      </div>
+
+      <div class="forgot-password">
+        <p>
+          <a (click)="goToForgotPassword()" class="forgot-link">Forgot Password?</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,214 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f7fa;
+
+  .main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    app-sidebar {
+      width: 240px;
+      background: #1f2937;
+      color: #fff;
+      border-right: 1px solid #e0e0e0;
+      transition: width 0.3s ease;
+
+
+      @media (max-width: 992px) {
+        width: 70px;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      background: #ffffff;
+      overflow-x: auto;
+
+      h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #1f2937;
+        text-align: center;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 20px;
+        font-size: 1rem;
+        color: #6b7280;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+        thead {
+          background: #4a90e2;
+          color: #fff;
+
+          th {
+            padding: 12px;
+            font-size: 0.95rem;
+            text-align: left;
+            font-weight: 600;
+          }
+        }
+
+        tbody {
+          tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s ease;
+
+            &:nth-child(even) {
+              background: #f9fafb;
+            }
+
+            &:hover {
+              background: #e0f2ff;
+            }
+
+            td {
+              padding: 12px;
+              font-size: 0.9rem;
+              color: #1f2937;
+            }
+          }
+        }
+      }
+
+      .btn-unlock {
+        padding: 6px 14px;
+        border: none;
+        border-radius: 6px;
+        background: #4a90e2;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+
+        &:hover {
+          background: #357ab8;
+        }
+
+        &:active {
+          background: #2b6090;
+        }
+      }
+
+      p {
+        text-align: center;
+        font-size: 1rem;
+        color: #6b7280;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+/* Laptop */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    .main-content {
+      app-sidebar {
+        width: 200px;
+      }
+
+      .content {
+        padding: 18px;
+
+        table {
+          th,
+          td {
+            padding: 11px;
+            font-size: 0.9rem;
+          }
+        }
+
+        .btn-unlock {
+          padding: 6px 12px;
+          font-size: 0.85rem;
+        }
+      }
+    }
+  }
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .dashboard-container {
+    .main-content {
+      flex-direction: column;
+
+      app-sidebar {
+        width: 70px;
+      }
+
+      .content {
+        padding: 15px;
+
+        table {
+          font-size: 0.85rem;
+
+          th,
+          td {
+            padding: 10px;
+          }
+        }
+
+        .btn-unlock {
+          padding: 5px 12px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+/* Mobiles */
+@media (max-width: 576px) {
+  .dashboard-container {
+    .main-content {
+      app-sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 10px;
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        table {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+
+          th,
+          td {
+            padding: 8px;
+          }
+        }
+
+        .btn-unlock {
+          padding: 5px 10px;
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}

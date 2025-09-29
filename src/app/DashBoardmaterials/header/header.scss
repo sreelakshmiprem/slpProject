@@ -1,0 +1,116 @@
+.header {
+  width: 100%;
+  height: 70px;
+  background: linear-gradient(180deg, #182848, #4b6cb7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  color: #fff;
+
+  .logo {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    span {
+      font-size: 14px;
+      color: #f0f0f0;
+    }
+
+    .btn-logout {
+      background-color: #f1f1f5;
+      color: rgb(7, 7, 7);
+      border: none;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #141313;
+      }
+
+      &:active {
+        background-color: #0c0b0b;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0 18px;
+
+    .logo {
+      font-size: 19px;
+    }
+
+    .nav {
+      gap: 12px;
+
+      span {
+        font-size: 13px;
+      }
+
+      .btn-logout {
+        padding: 7px 14px;
+        font-size: 13px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 15px;
+
+    .logo {
+      font-size: 18px;
+    }
+
+    .nav {
+      gap: 10px;
+
+      span {
+        font-size: 12px;
+      }
+
+      .btn-logout {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+
+    .nav {
+      margin-top: 8px;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+
+      .btn-logout {
+        width: 100%;
+        text-align: center;
+      }
+
+      span {
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+}

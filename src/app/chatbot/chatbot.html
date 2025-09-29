@@ -1,0 +1,31 @@
+<div class="chatbot-container">
+  <app-header></app-header>
+
+  <div class="content">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <h2>Career Assistant Bot</h2>
+      <p class="note">Ask questions about careers.</p>
+
+
+      <div class="chat-history">
+        @for (msg of chatHistory; track $index) {
+        <div [ngClass]="msg.from">
+          <strong>{{ msg.from === 'user' ? 'You' : 'careers bot' }}:</strong>
+          <p>{{ formatText(msg.message) }}</p>
+        </div>
+        }
+      </div>
+
+
+      <form [formGroup]="chatForm" (ngSubmit)="sendData()" class="chat-input">
+        <input type="text" formControlName="prompt"
+          placeholder="E.g. 'Ask me anything about careers?' or 'Tell me about AI'" [disabled]="loading" />
+        <button type="submit" [disabled]="loading">Send</button>
+      </form>
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>

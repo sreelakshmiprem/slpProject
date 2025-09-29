@@ -1,0 +1,54 @@
+<div class="applied-jobs-container">
+  <app-header></app-header>
+
+  <div class="content">
+    <app-sidebar></app-sidebar>
+
+    <main class="main-content">
+      <h2>My Applied Jobs</h2>
+
+      @if (loading) {
+      <div class="message info">Loading jobs...</div>
+      }
+
+      @if (errorMessage) {
+      <div class="message error">{{ errorMessage }}</div>
+      }
+
+      @if (!loading && appliedJobs.length > 0) {
+      <div class="table-wrapper">
+        <table class="jobs-table">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Location</th>
+              <th>Salary</th>
+              <th>Status</th>
+              <th>Full Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (job of appliedJobs; track job.applicationId; let i = $index) {
+            <tr>
+              <td>{{ job.jobTitle }}</td>
+              <td>{{ job.jobLocation }}</td>
+              <td>₹{{ job.salary }}</td>
+              <td>{{ job.status }}</td>
+              <td>{{ job.fullName }}</td>
+              <td>{{ job.email }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+
+      @if (!loading && appliedJobs.length === 0) {
+      <div class="message info">No jobs found for this user.</div>
+      }
+    </main>
+  </div>
+
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,68 @@
+<div class="dashboard-container">
+  <app-header></app-header>
+
+  <div class="main-content">
+    <app-sidebar></app-sidebar>
+
+    <section class="content">
+      <div class="job-dashboard">
+        <h2 class="title">Available Jobs</h2>
+
+        @if (loading) {
+        <div class="loading">Loading jobs...</div>
+        }
+
+        @if (!loading && jobs.length === 0) {
+        <div class="no-jobs">
+          No jobs available.
+        </div>
+        }
+
+        @if (!loading && jobs.length > 0) {
+        <div class="job-cards">
+          @for (job of jobs; track job.jobId) {
+          <div class="job-card">
+
+            @if (isDeadlinePassed(job.deadLine)) {
+            <div class="expired-badge">Expired</div>
+            }
+            <h3 class="job-title">{{ job.jobTitle }}</h3>
+            <p class="job-desc">{{ job.jobDescription }}</p>
+
+            <div class="job-meta">
+              <span>
+                <strong>Experience:</strong>
+                {{ job.minRequiredExperience }} - {{ job.maxRequiredExperience }} yrs
+              </span>
+              <span>
+                <strong>Salary:</strong> INR {{ job.salary }}
+              </span>
+              <span>
+                <strong>Location:</strong> {{ job.jobLocation }}
+              </span>
+              <span>
+                <strong>Deadline:{{job.deadLine | date :'dd-MMM-yyyy'}}</strong>
+
+              </span>
+
+
+
+            </div>
+
+            <div class="skills">
+              @for (skill of job.requiredSkills; track skill) {
+              <span class="skill-badge">
+                {{ skill }}
+              </span>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </section>
+  </div>
+
+  <app-footer></app-footer>
+</div>

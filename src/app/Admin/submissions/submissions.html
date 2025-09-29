@@ -1,0 +1,84 @@
+<div class="job-applications">
+  <app-header></app-header>
+
+  <div class="main">
+    <app-sidebar></app-sidebar>
+
+    <div class="content">
+      <h2>Job Applications</h2>
+
+      <div class="filters">
+        <label for="searchTerm">Search by Job ID or Job Title:</label>
+        <input type="text" [value]="searchTerm" (input)="validateSearchTerm()"
+          placeholder="Enter Job ID or Job Title" />
+        <button (click)="filterApplications()" [disabled]="isNegativeNumber || !searchTerm.trim()">
+          Apply Filter
+        </button>
+        @if (isNegativeNumber) {
+        <div class="error-message" style="color:red;">
+          Negative numbers are not allowed for Job ID
+        </div>
+        }
+      </div>
+
+      @if (loading) {
+      <div class="loading">Loading applications...</div>
+      }
+
+      @if (!loading && applications.length > 0) {
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>Job Title</th>
+              <th>Years of Experience</th>
+              <th>ATS Score</th>
+              <th>Recommended</th>
+              <th>Status</th>
+              <th>Resume</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (app of applications; track app.applicationId) {
+            <tr>
+              <td>{{ app.fullName }}</td>
+              <td>{{ app.email }}</td>
+              <td>{{ app.jobTitle }}</td>
+              <td>{{ app.yearsOfExperience }}</td>
+              <td>{{ app.atScore }}</td>
+              <td>{{ app.recommended }}</td>
+              <td>{{ app.status }}</td>
+              <td>
+                <button (click)="downloadResume(app.userId, app.fullName)" class="btn-icon">
+                  <i class="bi bi-download"></i>
+                </button>
+              </td>
+              <td>
+                <button (click)="updateStatus(app.applicationId, 1)" [disabled]="app.status === 'Invited'"
+                  class="btn-icon">
+                  <i class="bi bi-person-plus"></i>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        @if (inviteLoading) {
+        <div class="spinner-overlay">
+          <div class="spinner"></div>
+        </div>
+        }
+      </div>
+      }
+
+      @if (!loading && applications.length === 0) {
+      <p>No applications found.</p>
+      }
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

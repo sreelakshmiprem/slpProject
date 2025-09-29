@@ -1,0 +1,10 @@
+<header class="header">
+  <div class="logo">Secure Job Portal</div>
+
+  <nav class="nav">
+    @if (userName) {
+    <span>Welcome, {{ userName }}</span>
+    }
+    <button class="btn-logout" (click)="logout()">Logout</button>
+  </nav>
+</header>

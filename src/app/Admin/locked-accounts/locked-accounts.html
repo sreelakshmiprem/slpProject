@@ -1,0 +1,52 @@
+<div class="dashboard-container">
+
+  <app-header></app-header>
+
+  <div class="main-content">
+
+    <app-sidebar></app-sidebar>
+
+
+    <div class="content locked-accounts">
+      <h2>Locked Accounts</h2>
+
+      @if (loading) {
+      <div class="loading">Loading...</div>
+      }
+
+      @if (!loading && lockedAccounts.length > 0) {
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>User Name</th>
+            <th>Account Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (account of lockedAccounts; track account.userId) {
+          <tr>
+            <td>{{ account.userId }}</td>
+            <td>{{ account.userName }}</td>
+            <td>{{ account.accountStatus }}</td>
+            <td>
+              <button (click)="unlock(account.userName)" class="btn-unlock">
+                Unlock
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+      }
+
+      @if (!loading && lockedAccounts.length === 0) {
+      <p>No locked accounts found.</p>
+      }
+    </div>
+  </div>
+
+
+  <app-footer></app-footer>
+</div>

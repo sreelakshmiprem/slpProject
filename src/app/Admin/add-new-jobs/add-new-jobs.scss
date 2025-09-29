@@ -1,0 +1,228 @@
+.add-job-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f7fa;
+  overflow: hidden;
+
+  .content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    app-sidebar {
+      flex-shrink: 0;
+      width: 220px;
+      color: #fff;
+      height: 100%;
+      transition: width 0.3s ease;
+      overflow-y: auto;
+
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        width: 60px;
+      }
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .form-group {
+          display: flex;
+          flex-direction: column;
+
+          label {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #111827;
+          }
+
+          input,
+          textarea {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #d1d5db;
+            outline: none;
+            transition: all 0.2s ease;
+
+            &:focus {
+              border-color: #4a90e2;
+              box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
+            }
+          }
+
+          textarea {
+            min-height: 100px;
+            resize: vertical;
+          }
+        }
+
+        .skills-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+          gap: 10px;
+
+          div {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            input[type='checkbox'] {
+              accent-color: #4a90e2;
+              transform: scale(1.1);
+            }
+
+            span {
+              font-size: 14px;
+              color: #1f2937;
+            }
+          }
+        }
+
+        .btn-submit {
+          padding: 10px 22px;
+          border: none;
+          border-radius: 6px;
+          background-color: #4a90e2;
+          color: #fff;
+          font-weight: 600;
+          cursor: pointer;
+          width: fit-content;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background-color: #357ab8;
+          }
+
+          &:active {
+            background-color: #2b6090;
+          }
+
+          &:disabled {
+            background-color: #94b3ff;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}
+
+.error-message {
+  color: #d93025;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Laptop */
+@media (max-width: 1024px) {
+  .add-job-container {
+    .content {
+      app-sidebar {
+        width: 180px;
+      }
+
+      .main-content {
+        padding: 18px;
+
+        form {
+          gap: 15px;
+
+          .skills-list {
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          }
+
+          .btn-submit {
+            width: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .add-job-container {
+    .content {
+      flex-direction: column;
+
+      app-sidebar {
+        width: 100%;
+        height: auto;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .main-content {
+        padding: 15px;
+
+        form {
+          gap: 14px;
+
+          .skills-list {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+          }
+
+          .btn-submit {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .add-job-container {
+    .content {
+      .main-content {
+        padding: 12px;
+
+        form {
+          gap: 12px;
+
+          .skills-list {
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          }
+
+          .btn-submit {
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

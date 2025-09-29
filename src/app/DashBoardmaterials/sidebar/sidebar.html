@@ -1,0 +1,9 @@
+<aside class="sidebar">
+  <ul>
+    @for (menu of menus; track menu.menuPath) {
+    <li (click)="navigate(menu.menuPath)">
+      {{ menu.menuName }}
+    </li>
+    }
+  </ul>
+</aside>
